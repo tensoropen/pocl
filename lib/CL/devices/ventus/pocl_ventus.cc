@@ -294,6 +294,14 @@ pocl_ventus_init (unsigned j, cl_device_id dev, const char* parameters)
   dev->max_clock_frequency = 100; // TODO: This is frequency in MHz
   dev->address_bits = 32;
 
+  // Configuration for hose & device queue
+  dev->on_host_queue_props = CL_QUEUE_PROFILING_ENABLE;
+  dev->on_dev_queue_props = CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE | CL_QUEUE_PROFILING_ENABLE;
+  dev->dev_queue_pref_size = 16 * 1024;
+  dev->dev_queue_max_size = 64 * 1024;
+  dev->max_queues = 1;
+  dev->max_events = 1024;
+
   // Supports device side printf
   dev->device_side_printf = 0;
   dev->printf_buffer_size = 0;
